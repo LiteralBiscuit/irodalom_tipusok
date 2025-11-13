@@ -78,7 +78,7 @@ for (const sor of tableBodyArray) { // for loop a tartalom léterehozásához
     const tbodyRow = document.createElement("tr"); // adott sor létrehozása
     tbody.appendChild(tbodyRow); // adott sor hozzáfűzése a tbody-hoz
     if(sor.szerzo){ // ha van szerző
-        if (sor.szerzo != "Janus Pannonius"){ // ha a szerző Janus Pannonius akkor rowSpan = 1
+        if (sor.szerzo == "Janus Pannonius"){ // ha a szerző Janus Pannonius akkor rowSpan = 1
             createCell("td", sor.szerzo, tbodyRow); // cella létrehozás
         }
         else{ // ha nem akkor rowSpan = 2
