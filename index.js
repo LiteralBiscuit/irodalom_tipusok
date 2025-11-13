@@ -11,14 +11,13 @@ const tableheaderArray = [ // fej sor objektum array létrehozása
     { title: 'Műfaj' } // fej sor 3. elemének tárolása egy objektumban
 ]
 /**
- * @type {{ szerzo?: string, mu: string, mufaj: string, rowspan?: number}[]} // táblázat törzs array
+ * @type {{ szerzo?: string, mu: string, mufaj: string}[]} // táblázat törzs array
  */
 const tableBodyArray = [ // táblázat törzs array létrehozása
     { // 1. sor objektum létrehozása
     szerzo: 'Petőfi Sándor', // szerző megadása
     mu: 'A helység kalapácsa', // mű megadása
     mufaj: 'Elbeszélő költemény', // műfaj megadása
-    rowspan: 2 // rowspan megadása
     },
     { // 2. sor objektum létrehozása
     mu: 'Az apostol', // mű megadása
@@ -28,13 +27,11 @@ const tableBodyArray = [ // táblázat törzs array létrehozása
     szerzo: 'Janus Pannonius', // szerző megadása
     mu: 'Pannónia dícsérete', // mű megadása
     mufaj: 'Epigramma', // műfaj megadása
-    rowspan: 1   // rowspan megadása
     },
     { // 4. sor objektum létrehozása
     szerzo: 'Vörösmarty Mihály', // szerző megadása
     mu: 'A vén cigány', // mű megadása
     mufaj: 'Rapszódia', // műfaj megadása
-    rowspan: 2 // rowspan megadása
     },
     { // 5. sor objektum array létrehozása
     mu: 'Szózat', // mű megadása
@@ -81,17 +78,22 @@ for (const sor of tableBodyArray) { // for loop a tartalom léterehozásához
     const tbodyRow = document.createElement("tr"); // adott sor létrehozása
     tbody.appendChild(tbodyRow); // adott sor hozzáfűzése a tbody-hoz
     if(sor.szerzo){ // ha van szerző
-        createCell("td", sor.szerzo, tbodyRow, sor.rowspan) // 1. cella létrehozása
+        if (sor.szerzo != "Janus Pannonius"){ // ha a szerző Janus Pannonius akkor rowSpan = 1
+            createCell("td", sor.szerzo, tbodyRow); // cella létrehozás
+        }
+        else{ // ha nem akkor rowSpan = 2
+            createCell("td", sor.szerzo, tbodyRow, 2); // cella létrehozás
+        }
     }
-    createCell("td", sor.mu, tbodyRow) // 2. cella létrehozása
-    createCell("td", sor.mufaj, tbodyRow) // 3. cella létrehozása
+    createCell("td", sor.mu, tbodyRow); // cella létrehozás
+    createCell("td", sor.mufaj, tbodyRow); // cella létrehozás
 }
 /**
  * cellat létrehozó függvény
  * @param {string} cellType th vagy td 
  * @param {string} cellContent a cella tartalma
  * @param {HTMLTableRowElement} parentRow a sor ahova bemegy a csinált cella 
- * @param {number} colspan a cella colspanja alapesetben 1
+ * @param {number} rowspan a cella rowspanja alapesetben 1
  * @returns {void} nem tér vissza a megcsinált cellával
  */
 function createCell (cellType, cellContent, parentRow, rowspan = 1){ // cellát létrehozó függvény
