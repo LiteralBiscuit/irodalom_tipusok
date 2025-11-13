@@ -71,22 +71,22 @@ for (const header of tableheaderArray) { // for loop fej sor tartalmának a lét
 thead.appendChild(tableHeaderRow); // fej sor hozzáfűzése a fejhez
 
 // törzs tartalom
-for (const sor of tableBodyArray) { // for loop a tartalom léterehozásához
+for (let i = 0; i < tableBodyArray.length; i++) { // for loop a tartalom léterehozásához
     /**
      * @type {HTMLTableRowElement} sor
      */
     const tbodyRow = document.createElement("tr"); // adott sor létrehozása
     tbody.appendChild(tbodyRow); // adott sor hozzáfűzése a tbody-hoz
-    if(sor.szerzo){ // ha van szerző
-        if (sor.szerzo == "Janus Pannonius"){ // ha a szerző Janus Pannonius akkor rowSpan = 1
-            createCell("td", sor.szerzo, tbodyRow); // cella létrehozás
+    if(tableBodyArray[i].szerzo){ // ha van szerző
+        if(tableBodyArray[i+1].szerzo){ // ha a következő elemnek is van szerzője
+        createCell("td", tableBodyArray[i].szerzo, tbodyRow); // akkor rowSpan = 1
         }
-        else{ // ha nem akkor rowSpan = 2
-            createCell("td", sor.szerzo, tbodyRow, 2); // cella létrehozás
+        else{ // máskülönben
+            createCell("td", tableBodyArray[i].szerzo, tbodyRow, 2); // rowSpan = 2
         }
     }
-    createCell("td", sor.mu, tbodyRow); // cella létrehozás
-    createCell("td", sor.mufaj, tbodyRow); // cella létrehozás
+    createCell("td", tableBodyArray[i].mu, tbodyRow); // cella létrehozás
+    createCell("td", tableBodyArray[i].mufaj, tbodyRow); // cella létrehozás
 }
 /**
  * cellat létrehozó függvény
