@@ -36,6 +36,10 @@ const tableBodyArray = [ // táblázat törzs array létrehozása
     { // 5. sor objektum array létrehozása
     mu: 'Szózat', // mű megadása
     mufaj: 'Szózat', // műfaj megadása
+    },
+    { // 5. sor objektum array létrehozása
+    mu: 'Szózat', // mű megadása
+    mufaj: 'Szózat', // műfaj megadása
     }
 ]
 
@@ -78,7 +82,7 @@ for (let i = 0; i < tableBodyArray.length; i++) { // for loop a tartalom létere
     const tbodyRow = document.createElement("tr"); // adott sor létrehozása
     tbody.appendChild(tbodyRow); // adott sor hozzáfűzése a tbody-hoz
     if(tableBodyArray[i].szerzo){ // ha van szerző
-        if(tableBodyArray[i+1].szerzo){ // ha a következő elemnek is van szerzője
+        if(i+1 <= tableBodyArray.length && tableBodyArray[i+1].szerzo){ // ha a következő elemnek is van szerzője
         createCell("td", tableBodyArray[i].szerzo, tbodyRow); // akkor rowSpan = 1
         }
         else{ // máskülönben
